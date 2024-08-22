@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izabela & Jacek</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+         .expander-content {
+            display: none; /* Hide content by default */
+        }
+    </style>
+</head>
+<body class="container my-4" style="background-color: #2abf83;">
+    <div class="d-flex flex-column align-items-center">
+
+    
+        <div>
+            <img src="image.png"/>
+        </div>
+        <p></p>
+        <p class="mb-4">Rozwiąż zagadke aby odnaleźć szyfr do kłódki #1</p>
+        <p><b>Coś, co widzisz z przodu i z tyłu samochodu którym przyjechała Para Młoda</b></p>
+
+        <!-- Expander 1 -->
+        <button class="btn btn-primary my-2" id="expander-btn-1" onclick="showModal(1)">Podpowiedź 1</button>
+        <div id="expander1" class="expander-content p-3 border rounded bg-light">
+            <p>Samochód to Biały Opel Grandland</p>
+        </div>
+
+        <!-- Expander 2 -->
+        <button class="btn btn-primary my-2" id="expander-btn-2" onclick="showModal(2)">Podpowiedź 2</button>
+        <div id="expander2" class="expander-content p-3 border rounded bg-light">
+            <p>Nasz tablica rejestracyjna posiada tylko 3 liczby</p>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmationModal" class="modal fade" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmationModalLabel">Potwierdzenie</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Czy na pewno chcesz zobaczyć Podpowiedź?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="confirmExpand()">Tak</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let expanderToShow = null;
+
+        function showModal(expanderId) {
+            expanderToShow = expanderId;
+            let confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            confirmationModal.show();
+        }
+
+        function confirmExpand() {
+            if (expanderToShow) {
+                document.getElementById('expander' + expanderToShow).style.display = 'block';
+                document.getElementById('expander-btn-' + expanderToShow).style.display = 'none';
+
+                let confirmationModal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+                confirmationModal.hide();
+            }
+        }
+    </script>
+</body>
+</html>
